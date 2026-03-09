@@ -235,44 +235,96 @@ class User
     public static function getStats(int $userId): array
     {
         // Quiz performance
-        // Replace with this:
-$quizStats = [
-    'quizzes_taken'       => 0,
-    'avg_score'           => 0,
-    'best_score'          => 0,
-    'total_correct'       => 0,
-    'total_study_seconds' => 0,
-];
+        try {
+            $quizRow = Database::fetch(
+                "SELECT COUNT(*) as total_tests,
+                        COALESCE(AVG(score), 0) as avg_score,
+                        COALESCE(MAX(score), 0) as best_score,
+                        COALESCE(SUM(correct), 0) as total_correct,
+                        COALESCE(SUM(total), 0) as total_questions,
+                        MAX(completed_at) as last_test_date
+                 FROM sat_quiz_attempts
+                 WHERE user_id = ? AND status = 'completed'",
+                [$userId]
+            );
+        } catch (\Throwable $e) {
+            $quizRow = [
+                'total_tests'     => 0,
+                'avg_score'       => 0,
+                'best_score'      => 0,
+                'total_correct'   => 0,
+                'total_questions' => 0,
+                'last_test_date'  => null,
+            ];
+        }
 
-        // Streak
-        $streak = ['current_streak' => 0, 'longest_streak' => 0, 'total_study_days' => 0];
+        // Practice test stats
+        try {
+            $practiceRow = Database::fetch(
+                "SELECT COUNT(*) as total_practice_tests,
+                        COALESCE(MAX(total_score), 0) as best_practice_score,
+                        COALESCE(AVG(total_score), 0) as avg_practice_score
+                 FROM practice_test_attempts
+                 WHERE user_id = ? AND status = 'completed'",
+                [$userId]
+            );
+        } catch (\Throwable $e) {
+            $practiceRow = [
+                'total_practice_tests'  => 0,
+                'best_practice_score'   => 0,
+                'avg_practice_score'    => 0,
+            ];
+        }
 
-        // Replace with this:$xp = ['total_xp' => 0, 'current_level' => 1, 'league' => 'bronze', 'league_rank' => 0];
+        // Improvement: compare avg score of first 3 attempts vs last 3 attempts
+        $improvement = 0;
+        try {
+            $early = Database::fetch(
+                "SELECT COALESCE(AVG(score), 0) as avg_score
+                 FROM (
+                     SELECT score FROM sat_quiz_attempts
+                     WHERE user_id = ? AND status = 'completed'
+                     ORDER BY completed_at ASC LIMIT 3
+                 ) AS early_attempts",
+                [$userId]
+            );
+            $recent = Database::fetch(
+                "SELECT COALESCE(AVG(score), 0) as avg_score
+                 FROM (
+                     SELECT score FROM sat_quiz_attempts
+                     WHERE user_id = ? AND status = 'completed'
+                     ORDER BY completed_at DESC LIMIT 3
+                 ) AS recent_attempts",
+                [$userId]
+            );
+            $improvement = round((float) $recent['avg_score'] - (float) $early['avg_score'], 2);
+        } catch (\Throwable $e) {
+            $improvement = 0;
+        }
 
-        // Practice test scores
-        // Replace with this:
-$practiceTests = [];
+        // Build weighted average: combine quiz avg and practice avg weighted by attempt counts
+        $quizCount     = (int) $quizRow['total_tests'];
+        $practiceCount = (int) $practiceRow['total_practice_tests'];
+        $totalTests    = $quizCount + $practiceCount;
 
-        // Predicted score
-        $predicted = null;
-
-        // Category mastery
-        $categories = [];
-
-
-        // Achievements
-        $achievements = [];
-
+        if ($totalTests > 0) {
+            $weightedAvg = round(
+                ($quizRow['avg_score'] * $quizCount + $practiceRow['avg_practice_score'] * $practiceCount)
+                / $totalTests,
+                2
+            );
+        } else {
+            $weightedAvg = 0;
+        }
 
         return [
-    'quiz'         => $quizStats,
-    'streak'       => $streak,
-    'xp'           => [],
-    'tests'        => $practiceTests,
-    'predicted'    => $predicted,
-    'categories'   => $categories,
-    'achievements' => $achievements,
-];
+            'best_score'      => max((float) $quizRow['best_score'], (float) $practiceRow['best_practice_score']),
+            'avg_score'       => $weightedAvg,
+            'improvement'     => $improvement,
+            'total_questions' => (int) $quizRow['total_questions'],
+            'total_tests'     => $totalTests,
+            'last_test_date'  => $quizRow['last_test_date'],
+        ];
     }
 
     /**
