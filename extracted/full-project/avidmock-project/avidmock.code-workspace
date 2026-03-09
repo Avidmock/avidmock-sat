@@ -1,0 +1,34 @@
+{
+  "folders": [
+    { "name": "Student Panel (my.sat.avidmock.com)", "path": "student-panel" },
+    { "name": "Admin Panel (admin.sat.avidmock.com)", "path": "admin-panel" }
+  ],
+  "settings": {
+    "php.validate.executablePath": "/usr/bin/php",
+    "files.associations": { "*.php": "php" },
+    "editor.tabSize": 4,
+    "editor.formatOnSave": false,
+    "search.exclude": { "**/vendor": true, "**/node_modules": true }
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Student Panel (port 8080)",
+        "type": "php",
+        "request": "launch",
+        "runtimeExecutable": "php",
+        "runtimeArgs": ["-S", "localhost:8080", "-t", "${workspaceFolder:Student Panel (my.sat.avidmock.com)}"],
+        "port": 8080
+      },
+      {
+        "name": "Admin Panel (port 8081)",
+        "type": "php",
+        "request": "launch",
+        "runtimeExecutable": "php",
+        "runtimeArgs": ["-S", "localhost:8081", "-t", "${workspaceFolder:Admin Panel (admin.sat.avidmock.com)}"],
+        "port": 8081
+      }
+    ]
+  }
+}
