@@ -1059,194 +1059,6 @@ button { font-family: var(--ff); cursor: pointer; border: none; background: none
 }
 
 /* ─────────────────────────────────────────────
-   COMING SOON MODAL
-───────────────────────────────────────────── */
-.cs-backdrop {
-    position: fixed;
-    top: var(--topbar-h);
-    left: var(--sidebar-w);
-    right: 0; bottom: 0;
-    z-index: 90;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 32px 20px;
-    background: rgba(8,22,20,.32);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    animation: csIn .4s cubic-bezier(.16,1,.3,1) both;
-}
-@keyframes csIn { from { opacity: 0; } to { opacity: 1; } }
-
-.cs-modal {
-    background: var(--bg2);
-    border-radius: 22px;
-    width: 100%;
-    max-width: 420px;
-    max-height: calc(100dvh - 80px);
-    overflow-y: auto;
-    scrollbar-width: none;
-    box-shadow:
-        0 0 0 1px rgba(31,226,144,.1),
-        0 28px 70px rgba(6,18,16,.28),
-        0 6px 18px rgba(6,18,16,.1);
-    animation: csModalIn .5s cubic-bezier(.16,1,.3,1) .05s both;
-}
-.cs-modal::-webkit-scrollbar { display: none; }
-@keyframes csModalIn {
-    from { opacity: 0; transform: translateY(22px) scale(.96); }
-    to   { opacity: 1; transform: none; }
-}
-
-/* Modal band */
-.cs-band {
-    background: var(--dk);
-    padding: 32px 28px 26px;
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-}
-.cs-band-grid {
-    position: absolute; inset: 0;
-    background-image:
-        linear-gradient(rgba(31,226,144,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(31,226,144,.03) 1px, transparent 1px);
-    background-size: 28px 28px;
-    pointer-events: none;
-}
-.cs-band-glow {
-    position: absolute;
-    top: -90px; left: 50%;
-    transform: translateX(-50%);
-    width: 280px; height: 280px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(31,226,144,.08) 0%, transparent 65%);
-    pointer-events: none;
-}
-
-.cs-icon {
-    position: relative; z-index: 1;
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    background: rgba(31,226,144,.1);
-    border: 1.5px solid rgba(31,226,144,.2);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 16px;
-    animation: iconPulse 3s ease-in-out infinite;
-}
-@keyframes iconPulse {
-    0%, 100% { box-shadow: 0 0 0 0   rgba(31,226,144,.14); }
-    50%       { box-shadow: 0 0 0 10px rgba(31,226,144,0); }
-}
-.cs-icon svg {
-    width: 27px; height: 27px;
-    stroke: var(--ac); fill: none;
-    stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
-}
-
-.cs-chip {
-    position: relative; z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 3px 12px;
-    border-radius: 50px;
-    background: rgba(31,226,144,.08);
-    border: 1px solid rgba(31,226,144,.18);
-    font-size: .5625rem;
-    font-weight: 800;
-    color: var(--ac);
-    text-transform: uppercase;
-    letter-spacing: .7px;
-    margin-bottom: 12px;
-}
-.cs-chip-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--ac);
-    animation: eyeDot 1.8s ease-in-out infinite;
-}
-.cs-title {
-    position: relative; z-index: 1;
-    font-size: 1.3125rem;
-    font-weight: 800;
-    color: #fff;
-    letter-spacing: -.03em;
-    line-height: 1.25;
-    margin-bottom: 8px;
-}
-.cs-sub {
-    position: relative; z-index: 1;
-    font-size: .8125rem;
-    color: rgba(255,255,255,.35);
-    line-height: 1.65;
-}
-
-/* Modal body */
-.cs-body { padding: 22px 26px 26px; }
-.cs-features { display: flex; flex-direction: column; gap: 9px; margin-bottom: 20px; }
-.cs-feat {
-    display: flex;
-    align-items: flex-start;
-    gap: 11px;
-    padding: 11px 13px;
-    background: var(--bg);
-    border: 1px solid var(--bd);
-    border-radius: 12px;
-    transition: border-color .2s;
-}
-.cs-feat:hover { border-color: rgba(31,226,144,.25); }
-.cs-feat-ico {
-    flex-shrink: 0;
-    width: 32px; height: 32px;
-    border-radius: 9px;
-    background: rgba(20,50,48,.06);
-    display: flex; align-items: center; justify-content: center;
-}
-.cs-feat-ico svg {
-    width: 14px; height: 14px;
-    stroke: var(--dk); fill: none;
-    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-}
-.cs-feat-ico.ac  { background: rgba(31,226,144,.08); }
-.cs-feat-ico.ac svg  { stroke: var(--ac2); }
-.cs-feat-ico.warn { background: rgba(245,158,11,.08); }
-.cs-feat-ico.warn svg { stroke: var(--warn); }
-.cs-feat-title { font-size: .8125rem; font-weight: 700; color: var(--tx); margin-bottom: 2px; }
-.cs-feat-desc  { font-size: .725rem; color: var(--tx3); line-height: 1.45; }
-
-.cs-cta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    width: 100%;
-    padding: 12px 18px;
-    background: var(--dk);
-    color: #fff;
-    font-family: var(--ff);
-    font-size: .875rem;
-    font-weight: 700;
-    border-radius: 11px;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: background .2s, transform .2s, box-shadow .2s;
-    min-height: 44px;
-}
-.cs-cta:hover {
-    background: var(--dk2);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(20,50,48,.18);
-}
-.cs-cta svg {
-    width: 14px; height: 14px;
-    stroke: var(--ac); fill: none;
-    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-    flex-shrink: 0;
-}
-
-/* ─────────────────────────────────────────────
    RESPONSIVE
    ─────────────────────────────────────────────
    ≥ 1100   4-col overview, hero 2-col, bottom 2-col
@@ -1266,7 +1078,6 @@ button { font-family: var(--ff); cursor: pointer; border: none; background: none
 
 @media (max-width: 900px) {
     .main-content { margin-left: 0; padding: 20px var(--pad-sm) 72px; }
-    .cs-backdrop  { left: 0; top: var(--topbar-h); }
 }
 
 @media (max-width: 768px) {
@@ -1296,10 +1107,6 @@ button { font-family: var(--ff); cursor: pointer; border: none; background: none
     .sessions-grid { gap: 8px; }
     .session-card  { padding: 1rem .9375rem; border-radius: var(--r); }
     .session-title { font-size: .875rem; }
-
-    .cs-band { padding: 26px 20px 22px; }
-    .cs-body { padding: 18px 20px 22px; }
-    .cs-title { font-size: 1.125rem; }
 
     .toast { bottom: 16px; right: 16px; left: 16px; justify-content: center; }
 }
@@ -1693,62 +1500,6 @@ $nextSpotsPct  = $nextMaxSpots > 0 ? round((($nextMaxSpots - $nextSpotsLeft) / $
     <span id="toastMsg">Enrolled successfully!</span>
 </div>
 
-<!-- ══════════════════════════════════════
-     COMING SOON MODAL
-═══════════════════════════════════════ -->
-<div class="cs-backdrop" id="csBackdrop" role="dialog" aria-modal="true" aria-labelledby="csTitle">
-    <div class="cs-modal" id="csModal">
-
-        <div class="cs-band">
-            <div class="cs-band-grid"></div>
-            <div class="cs-band-glow"></div>
-            <div class="cs-chip">
-                <span class="cs-chip-dot"></span>
-                Coming Soon
-            </div>
-            <div class="cs-title" id="csTitle">Group Sessions</div>
-            <div class="cs-sub">Live tutor-led sessions with small groups<br>are launching very soon.</div>
-        </div>
-
-        <div class="cs-body">
-            <div class="cs-features">
-                <div class="cs-feat">
-                    <div class="cs-feat-ico ac">
-                        <svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.899L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
-                    </div>
-                    <div>
-                        <div class="cs-feat-title">Live Video Sessions</div>
-                        <div class="cs-feat-desc">Interactive sessions with expert tutors in real time — no downloads needed.</div>
-                    </div>
-                </div>
-                <div class="cs-feat">
-                    <div class="cs-feat-ico">
-                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-                    </div>
-                    <div>
-                        <div class="cs-feat-title">Small Group Format</div>
-                        <div class="cs-feat-desc">Max 20 students per session so every student gets personal attention.</div>
-                    </div>
-                </div>
-                <div class="cs-feat">
-                    <div class="cs-feat-ico warn">
-                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    </div>
-                    <div>
-                        <div class="cs-feat-title">Recordings &amp; Recaps</div>
-                        <div class="cs-feat-desc">Every session is recorded and saved to your dashboard with full notes.</div>
-                    </div>
-                </div>
-            </div>
-            <a href="/" class="cs-cta">
-                <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-                Back to Dashboard
-            </a>
-        </div>
-
-    </div>
-</div>
-
 <script>
 (function () {
     'use strict';
@@ -1843,43 +1594,6 @@ $nextSpotsPct  = $nextMaxSpots > 0 ? round((($nextMaxSpots - $nextSpotsLeft) / $
         document.getElementById('toastMsg').textContent = msg;
         t.classList.add('show');
         setTimeout(function () { t.classList.remove('show'); }, 3200);
-    }
-
-    /* ── Coming soon modal — shake on dismiss attempt ── */
-    function shakeModal() {
-        var m = document.getElementById('csModal');
-        if (!m) return;
-        m.style.transition = 'transform .08s ease';
-        m.style.transform  = 'scale(.975) translateY(5px)';
-        setTimeout(function () {
-            m.style.transition = 'transform .45s cubic-bezier(.16,1,.3,1)';
-            m.style.transform  = 'scale(1) translateY(0)';
-            setTimeout(function () { m.style.transition = ''; }, 460);
-        }, 80);
-    }
-
-    var backdrop = document.getElementById('csBackdrop');
-    if (backdrop) {
-        backdrop.addEventListener('click', function (e) {
-            if (e.target === this) shakeModal();
-        });
-    }
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') shakeModal();
-    });
-
-    /* Focus trap for modal */
-    var modal = document.getElementById('csModal');
-    if (modal) {
-        var focusEls = modal.querySelectorAll('a[href], button:not([disabled])');
-        var first    = focusEls[0];
-        var last     = focusEls[focusEls.length - 1];
-        modal.addEventListener('keydown', function (e) {
-            if (e.key !== 'Tab') return;
-            if (e.shiftKey  && document.activeElement === first) { e.preventDefault(); last.focus(); }
-            if (!e.shiftKey && document.activeElement === last)  { e.preventDefault(); first.focus(); }
-        });
-        setTimeout(function () { if (first) first.focus(); }, 560);
     }
 
 }());
