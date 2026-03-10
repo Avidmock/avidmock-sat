@@ -83,17 +83,23 @@ $code = preg_replace(
     $code
 );
 
-// Replace require_once for lib/ files (already mocked)
+// Replace require_once for lib/ files (already mocked) — but NOT includes/
 $code = preg_replace(
     "/require_once\s+.*?\/lib\/\w+\.php.*?;/",
     "/* mock: lib already loaded */",
     $code
 );
 
-// Replace require_once for Auth.php etc
-$code = preg_replace(
-    "/require_once\s+.*?Auth\.php.*?;/",
-    "/* mock: Auth already loaded */",
+// Fix $_SERVER['DOCUMENT_ROOT'] references so includes/ paths resolve correctly
+// Replace DOCUMENT_ROOT with the actual root path
+$code = str_replace(
+    "\$_SERVER['DOCUMENT_ROOT']",
+    "'" . str_replace("'", "\\'", $root) . "'",
+    $code
+);
+$code = str_replace(
+    '$_SERVER["DOCUMENT_ROOT"]',
+    "'" . str_replace("'", "\\'", $root) . "'",
     $code
 );
 
