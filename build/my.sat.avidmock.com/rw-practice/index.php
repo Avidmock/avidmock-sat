@@ -26,6 +26,9 @@ $types    = AIEssayScorer::QUESTION_TYPES;
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
 
+.main-content{margin-left:260px;margin-top:56px;padding:32px 32px 80px;min-height:calc(100vh - 56px)}
+@media(max-width:768px){.main-content{margin-left:0;padding:20px 16px 72px}}
+
 .rw-wrap{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
 
 /* Header */
@@ -125,6 +128,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-h
 </head>
 <body>
 
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/sidebar.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
+?>
+
+<main class="main-content">
 <div class="rw-wrap">
 
     <a href="/index.php" class="rw-back">
@@ -199,6 +208,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-h
     </div>
 
 </div>
+</main>
 
 <script>
 const types = <?= json_encode($types) ?>;

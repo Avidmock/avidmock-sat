@@ -1133,7 +1133,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
                                 <div class="related-meta"><?= date('M j · g:i A', $rTs) ?> · <?= htmlspecialchars($rel['tutor_name'] ?? '') ?></div>
                             </div>
                             <?php if ($relEnrolled): ?>
-                            <span class="related-enrolled-check">✓</span>
+                            <span class="related-enrolled-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                             <?php else: ?>
                             <button class="related-enroll-btn"
                                     onclick="event.preventDefault(); doEnroll(<?= intval($rel['id']) ?>, this)">
@@ -1209,7 +1209,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
                         Enroll Now
                     </button>
                     <?php elseif ($isEnrolled && !$isPast): ?>
-                    <div class="enrolled-confirm">✓ You're enrolled</div>
+                    <div class="enrolled-confirm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><polyline points="20 6 9 17 4 12"/></svg>You're enrolled</div>
                     <?php elseif ($isLive && $isEnrolled): ?>
                     <a href="<?= htmlspecialchars($sess['join_url'] ?? '#') ?>"
                        class="enroll-full-btn"
@@ -1245,7 +1245,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
                                     <div class="tutor-stat-key">Students</div>
                                 </div>
                                 <div>
-                                    <div class="tutor-stat-val ac">★ <?= number_format(floatval($sess['tutor_rating'] ?? 4.9), 1) ?></div>
+                                    <div class="tutor-stat-val ac"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:2px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><?= number_format(floatval($sess['tutor_rating'] ?? 4.9), 1) ?></div>
                                     <div class="tutor-stat-key">Rating</div>
                                 </div>
                             </div>
@@ -1380,7 +1380,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
                 /* Side enroll button → enrolled confirm */
                 var sideBtn = document.getElementById('enrollBtnSide');
                 if (sideBtn) {
-                    sideBtn.outerHTML = '<div class="enrolled-confirm">✓ You\'re enrolled</div>';
+                    sideBtn.outerHTML = '<div class="enrolled-confirm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><polyline points="20 6 9 17 4 12"/></svg>You\\\'re enrolled</div>';
                 }
                 /* Add enrolled badge to hero if not present */
                 var existingBadge = document.querySelector('.enrolled-badge');
@@ -1395,7 +1395,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
                 }
                 /* Update related enroll button if it triggered this */
                 if (btn !== heroBtn && btn !== document.getElementById('enrollBtnSide')) {
-                    btn.outerHTML = '<span class="related-enrolled-check">✓</span>';
+                    btn.outerHTML = '<span class="related-enrolled-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>';
                 }
             } else {
                 btn.innerHTML = orig;

@@ -320,7 +320,12 @@ button { font-family: var(--ff); cursor: pointer; border: none; background: none
 </head>
 <body>
 
-<div class="main-content">
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/sidebar.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
+?>
+
+<main class="main-content">
 
     <h1 class="page-title">Parent Progress Reports</h1>
     <p class="page-sub">Keep your parents in the loop with automated weekly progress updates.</p>
@@ -450,7 +455,7 @@ button { font-family: var(--ff); cursor: pointer; border: none; background: none
             </button>
         </div>
     </form>
-</div>
+</main>
 
 <!-- Preview Modal -->
 <div class="modal-overlay" id="previewModal">

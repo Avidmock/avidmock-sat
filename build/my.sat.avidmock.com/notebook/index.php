@@ -32,11 +32,8 @@ $totalEntries = $entries['total'] ?? 0;
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
 
 /* Layout */
-.nb-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
-@media(max-width:768px){.nb-layout{grid-template-columns:1fr}.nb-sidebar{display:none}}
-.nb-sidebar{background:var(--dk);color:#fff;padding:1.5rem;display:flex;flex-direction:column;gap:1.5rem}
-.nb-main{padding:2rem 2.5rem}
-@media(max-width:768px){.nb-main{padding:1rem}}
+.main-content{margin-left:260px;margin-top:56px;padding:32px 32px 80px;min-height:calc(100vh - 56px)}
+@media(max-width:768px){.main-content{margin-left:0;padding:20px 16px 72px}}
 
 /* Sidebar */
 .nb-logo{font:800 1.1rem 'DM Sans';color:var(--ac);text-decoration:none;display:flex;align-items:center;gap:.5rem}
@@ -128,35 +125,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-h
 </head>
 <body>
 
-<div class="nb-layout">
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/sidebar.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
+?>
 
-<!-- Sidebar -->
-<nav class="nb-sidebar">
-    <a href="/" class="nb-logo">
-        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2L2 7l10 5 10-5-10-5z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 17l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-        Avidmock SAT
-    </a>
-
-    <div class="nb-nav">
-        <a href="/index.php"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" fill="none" stroke="currentColor" stroke-width="2"/></svg> Dashboard</a>
-        <a href="/notebook/" class="active"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 19.5A2.5 2.5 0 016.5 17H20" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" fill="none" stroke="currentColor" stroke-width="2"/></svg> Smart Notebook <span class="nb-badge"><?= $totalEntries ?></span></a>
-        <a href="/adaptive/"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M22 12h-4l-3 9L9 3l-3 9H2" fill="none" stroke="currentColor" stroke-width="2"/></svg> Adaptive Practice</a>
-        <a href="/ai-tutor/"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" fill="none" stroke="currentColor" stroke-width="2"/></svg> AI Tutor</a>
-        <a href="/study-rooms/"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/></svg> Study Rooms</a>
-
-        <div class="nb-divider"></div>
-        <div class="nb-section-label">Folders</div>
-        <?php foreach ($folders as $f): ?>
-        <a href="?folder=<?= urlencode($f['name']) ?>">
-            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-            <?= htmlspecialchars($f['name']) ?> <span class="nb-badge"><?= $f['count'] ?></span>
-        </a>
-        <?php endforeach; ?>
-    </div>
-</nav>
-
-<!-- Main Content -->
-<div class="nb-main">
+<main class="main-content">
 
     <div class="nb-header">
         <div>
@@ -248,8 +222,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-h
     </div>
     <?php endif; ?>
 
-</div>
-</div>
+</main>
 
 <!-- Scan Modal -->
 <div class="nb-modal-overlay" id="modalOverlay">

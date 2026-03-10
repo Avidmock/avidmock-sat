@@ -47,7 +47,8 @@ body{font-family:var(--font);color:var(--tx);background:var(--bg);min-height:100
 a{color:var(--ac2);text-decoration:none;transition:color .2s var(--transition)}
 a:hover{color:var(--dk)}
 
-.wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+.main-content{margin-left:260px;margin-top:56px;padding:32px 32px 80px;min-height:calc(100vh - 56px)}
+.wrap{max-width:1200px;margin:0 auto;padding:0}
 
 /* ── Hero ── */
 .hero{
@@ -208,9 +209,12 @@ a:hover{color:var(--dk)}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s var(--transition),transform .5s var(--transition)}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
+@media(max-width:768px){
+  .main-content{margin-left:0;padding:20px 16px 72px}
+}
 /* ── Responsive ── */
 @media(max-width:640px){
-  .wrap{padding:20px 16px 60px}
+  .wrap{}
   .hero{padding:32px 24px}
   .hero h1{font-size:1.4rem}
   .form-row{grid-template-columns:1fr}
@@ -233,6 +237,12 @@ a:hover{color:var(--dk)}
 </head>
 <body>
 
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/sidebar.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
+?>
+
+<main class="main-content">
 <div class="wrap">
 
   <!-- Hero -->
@@ -429,7 +439,7 @@ a:hover{color:var(--dk)}
           <td>
             <?php if ($h['status'] === 'finished'): ?>
               <?php if ($h['won']): ?>
-                <span class="badge-win">&#x1F3C6; 1st</span>
+                <span class="badge-win"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:2px"><path d="M6 9H4.5a2.5 2.5 0 010-5H6"/><path d="M18 9h1.5a2.5 2.5 0 000-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0012 0V2z"/></svg> 1st</span>
               <?php elseif ($h['rank'] > 0): ?>
                 <span class="badge-loss">#<?= $h['rank'] ?> of <?= $h['total_players'] ?></span>
               <?php else: ?>
@@ -456,6 +466,7 @@ a:hover{color:var(--dk)}
   </div>
 
 </div>
+</main>
 
 <!-- Toast notification -->
 <div class="toast" id="toast"></div>

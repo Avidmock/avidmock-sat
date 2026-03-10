@@ -577,13 +577,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
                         <?php foreach ($weakMathTopics as $topic): ?>
                         <button class="weak-chip" type="button"
                             onclick="sendSuggestion('Help me understand <?= htmlspecialchars($topic['name'] ?? '', ENT_QUOTES) ?> step by step')">
-                            📐 <?= htmlspecialchars($topic['name'] ?? '') ?>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M1 23L4 1h16l3 22H1z"/><path d="M4 1l8 10 8-10"/><path d="M1 23l11-12 11 12"/></svg><?= htmlspecialchars($topic['name'] ?? '') ?>
                         </button>
                         <?php endforeach; ?>
                         <?php foreach ($weakRWTopics as $topic): ?>
                         <button class="weak-chip" type="button"
                             onclick="sendSuggestion('Explain the strategy for <?= htmlspecialchars($topic['name'] ?? '', ENT_QUOTES) ?> questions')">
-                            📖 <?= htmlspecialchars($topic['name'] ?? '') ?>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><?= htmlspecialchars($topic['name'] ?? '') ?>
                         </button>
                         <?php endforeach; ?>
                     </div>

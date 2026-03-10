@@ -155,6 +155,7 @@ $taskIcons = [
   --font:'DM Sans',system-ui,sans-serif;
   --mono:'DM Mono','Fira Code',monospace;
   --transition:cubic-bezier(.4,0,.2,1);
+  --sidebar-w:260px;--topbar-h:56px;
 }
 html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
 body{
@@ -165,9 +166,10 @@ a{color:var(--ac2);text-decoration:none;transition:color .2s var(--transition)}
 a:hover{color:var(--dk)}
 
 /* ── Layout Shell ───────────────────────────────────────────── */
-.dash-wrap{
-  max-width:1200px;margin:0 auto;padding:32px 24px 80px;
+.main-content{
+  margin-left:var(--sidebar-w);margin-top:var(--topbar-h);padding:32px 32px 80px;min-height:calc(100vh - var(--topbar-h));
 }
+@media(max-width:768px){ .main-content{margin-left:0;padding:20px 16px 72px} }
 
 /* ── Scroll Reveal ──────────────────────────────────────────── */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s var(--transition),transform .6s var(--transition)}
@@ -405,12 +407,13 @@ a:hover{color:var(--dk)}
   display:flex;align-items:center;justify-content:center;
   margin-bottom:10px;font-size:1.3rem;
 }
-.streak-item-icon.fire{background:rgba(255,140,0,.1)}
-.streak-item-icon.star{background:rgba(31,226,144,.1)}
-.streak-item-icon.bolt{background:rgba(99,102,241,.1)}
-.streak-item-icon.shield{background:rgba(236,72,153,.1)}
-.streak-item-icon.trophy{background:rgba(245,158,11,.1)}
-.streak-item-icon.medal{background:rgba(20,50,48,.08)}
+.streak-item-icon svg{width:22px;height:22px}
+.streak-item-icon.fire{background:rgba(255,140,0,.1);color:#ff8c00}
+.streak-item-icon.star{background:rgba(31,226,144,.1);color:var(--ac2)}
+.streak-item-icon.bolt{background:rgba(99,102,241,.1);color:#6366f1}
+.streak-item-icon.shield{background:rgba(236,72,153,.1);color:#ec4899}
+.streak-item-icon.trophy{background:rgba(245,158,11,.1);color:#f59e0b}
+.streak-item-icon.medal{background:rgba(20,50,48,.08);color:var(--dk)}
 .streak-val{font-size:1.5rem;font-weight:800;color:var(--dk);font-family:var(--mono);line-height:1;margin-bottom:4px}
 .streak-label{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:rgba(20,50,48,.4)}
 .xp-progress-wrap{grid-column:1/-1;padding:0 4px}
@@ -440,10 +443,11 @@ a:hover{color:var(--dk)}
   width:44px;height:44px;border-radius:12px;margin:0 auto 12px;
   display:flex;align-items:center;justify-content:center;font-size:1.2rem;
 }
-.insight-icon.purple{background:rgba(99,102,241,.1)}
-.insight-icon.blue{background:rgba(59,130,246,.1)}
-.insight-icon.amber{background:rgba(245,158,11,.1)}
-.insight-icon.rose{background:rgba(236,72,153,.1)}
+.insight-icon svg{width:22px;height:22px}
+.insight-icon.purple{background:rgba(99,102,241,.1);color:#6366f1}
+.insight-icon.blue{background:rgba(59,130,246,.1);color:#3b82f6}
+.insight-icon.amber{background:rgba(245,158,11,.1);color:#f59e0b}
+.insight-icon.rose{background:rgba(236,72,153,.1);color:#ec4899}
 .insight-val{font-size:1.8rem;font-weight:800;color:var(--dk);font-family:var(--mono);line-height:1;margin-bottom:4px}
 .insight-label{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:rgba(20,50,48,.4)}
 
@@ -531,7 +535,7 @@ a:hover{color:var(--dk)}
   .hero{padding:32px 24px 28px}
 }
 @media(max-width:540px){
-  .dash-wrap{padding:16px 14px 60px}
+  .main-content{padding:16px 14px 60px}
   .hero{padding:24px 18px 22px}
   .hero-name{font-size:1.4rem}
   .hero-actions{gap:8px}
@@ -547,9 +551,14 @@ a:hover{color:var(--dk)}
 </head>
 <body>
 
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/sidebar.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
+?>
+
 <?php $scoreBadgeSize = 'large'; $scoreBadgeStyle = 'card'; ?>
 
-<div class="dash-wrap">
+<main class="main-content">
 
 <!-- ═══════════════════════════════════════════════════════════════
      1. AI GREETING HERO
@@ -698,7 +707,7 @@ a:hover{color:var(--dk)}
     </div>
   <?php else: ?>
     <div class="plan-empty">
-      <div class="plan-empty-icon">&#128218;</div>
+      <div class="plan-empty-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
       <p class="plan-empty-text">No study plan for today yet.</p>
       <a href="/schedule/generate" class="plan-empty-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 017 7c0 3-2 5.5-4 7l-1 3H10l-1-3c-2-1.5-4-4-4-7a7 7 0 017-7z"/><line x1="10" y1="22" x2="14" y2="22"/></svg>
@@ -790,32 +799,32 @@ a:hover{color:var(--dk)}
   </div>
   <div class="streak-row">
     <div class="streak-item">
-      <div class="streak-item-icon fire">&#128293;</div>
+      <div class="streak-item-icon fire"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c2-2.96 0-7-1-8 0 3.04-2.22 5.5-4 7.5S3 16 5.5 18.5C7.5 20.5 10 21 12 21s4.5-.5 6.5-2.5S22 14.54 22 12c-1.5 1-4 0-5-2.5-.5-1.5-1-3-1-5-1 1-3 5.04-4 7.5z"/></svg></div>
       <span class="streak-val" data-count="<?= $currentStreak ?>"><?= $currentStreak ?></span>
       <span class="streak-label">Day Streak</span>
     </div>
     <div class="streak-item">
-      <div class="streak-item-icon star">&#11088;</div>
+      <div class="streak-item-icon star"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
       <span class="streak-val" data-count="<?= $longestStreak ?>"><?= $longestStreak ?></span>
       <span class="streak-label">Best Streak</span>
     </div>
     <div class="streak-item">
-      <div class="streak-item-icon bolt">&#9889;</div>
+      <div class="streak-item-icon bolt"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
       <span class="streak-val" data-count="<?= $totalXP ?>"><?= number_format($totalXP) ?></span>
       <span class="streak-label">Total XP</span>
     </div>
     <div class="streak-item">
-      <div class="streak-item-icon shield">&#127941;</div>
+      <div class="streak-item-icon shield"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
       <span class="streak-val">Lv <?= $level ?></span>
       <span class="streak-label">Current Level</span>
     </div>
     <div class="streak-item">
-      <div class="streak-item-icon trophy">&#127942;</div>
+      <div class="streak-item-icon trophy"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 010-5H6"/><path d="M18 9h1.5a2.5 2.5 0 000-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0012 0V2z"/></svg></div>
       <span class="streak-val"><?= htmlspecialchars($leagueName) ?></span>
       <span class="streak-label">League</span>
     </div>
     <div class="streak-item">
-      <div class="streak-item-icon medal">&#129351;</div>
+      <div class="streak-item-icon medal"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
       <span class="streak-val">#<?= $userRank ?: '—' ?></span>
       <span class="streak-label">Rank</span>
     </div>
@@ -836,22 +845,22 @@ a:hover{color:var(--dk)}
   <p class="section-title">Quick Insights</p>
   <div class="insights-grid">
     <div class="insight-card">
-      <div class="insight-icon purple">&#9997;&#65039;</div>
+      <div class="insight-icon purple"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
       <p class="insight-val" data-count="<?= $questionsPracticed ?>"><?= number_format($questionsPracticed) ?></p>
       <p class="insight-label">Questions Practiced</p>
     </div>
     <div class="insight-card">
-      <div class="insight-icon blue">&#128203;</div>
+      <div class="insight-icon blue"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
       <p class="insight-val" data-count="<?= $practiceTestsTaken ?>"><?= $practiceTestsTaken ?></p>
       <p class="insight-label">Practice Tests</p>
     </div>
     <div class="insight-card">
-      <div class="insight-icon amber">&#129302;</div>
+      <div class="insight-icon amber"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
       <p class="insight-val" data-count="<?= $aiTutorConversations ?>"><?= $aiTutorConversations ?></p>
       <p class="insight-label">AI Tutor Chats</p>
     </div>
     <div class="insight-card">
-      <div class="insight-icon rose">&#9200;</div>
+      <div class="insight-icon rose"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
       <p class="insight-val" data-count="<?= $studyHoursWeek ?>"><?= $studyHoursWeek ?></p>
       <p class="insight-label">Hours This Week</p>
     </div>
@@ -914,7 +923,7 @@ a:hover{color:var(--dk)}
     <div class="badges-grid">
       <?php foreach ($recentBadges as $badge): ?>
       <div class="badge-card">
-        <div class="badge-icon"><?= htmlspecialchars($badge['icon'] ?? '&#127942;') ?></div>
+        <div class="badge-icon"><?= !empty($badge['icon_svg']) ? $badge['icon_svg'] : '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>' ?></div>
         <p class="badge-name"><?= htmlspecialchars($badge['name'] ?? 'Achievement') ?></p>
         <p class="badge-date"><?= !empty($badge['unlocked_at']) ? date('M j', strtotime($badge['unlocked_at'])) : '' ?></p>
       </div>
@@ -963,7 +972,7 @@ a:hover{color:var(--dk)}
 </div>
 
 </div><!-- /dash-grid -->
-</div><!-- /dash-wrap -->
+</main><!-- /main-content -->
 
 <script>
 (function(){

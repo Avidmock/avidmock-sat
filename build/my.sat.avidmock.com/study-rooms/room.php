@@ -321,6 +321,10 @@ a{color:var(--ac2);text-decoration:none}
   100%{opacity:0;transform:translateY(100vh) rotate(720deg)}
 }
 
+/* ── Main content ── */
+.main-content{margin-left:260px;margin-top:56px;padding:32px 32px 80px;min-height:calc(100vh - 56px)}
+@media(max-width:768px){.main-content{margin-left:0;padding:20px 16px 72px}}
+
 /* ── Responsive ── */
 @media(max-width:640px){
   .wrap{padding:16px 14px 60px}
@@ -336,6 +340,12 @@ a{color:var(--ac2);text-decoration:none}
 </head>
 <body>
 
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/sidebar.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
+?>
+
+<main class="main-content">
 <div class="wrap">
   <a href="/study-rooms/" class="back-link">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
@@ -460,6 +470,7 @@ a{color:var(--ac2);text-decoration:none}
     </div>
   </div>
 </div>
+</main>
 
 <div class="toast" id="toast"></div>
 

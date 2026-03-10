@@ -45,7 +45,8 @@ body{font-family:var(--font);color:var(--tx);background:var(--bg);min-height:100
 a{color:var(--ac2);text-decoration:none;transition:color .2s var(--transition)}
 a:hover{color:var(--dk)}
 
-.wrap{max-width:800px;margin:0 auto;padding:32px 24px 80px}
+.main-content{margin-left:260px;margin-top:56px;padding:32px 32px 80px;min-height:calc(100vh - 56px)}
+.wrap{max-width:800px;margin:0 auto;padding:0}
 .back{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;color:var(--dk);opacity:.6;margin-bottom:24px;transition:opacity .2s}
 .back:hover{opacity:1}
 
@@ -106,8 +107,11 @@ a:hover{color:var(--dk)}
 
 .empty-state{text-align:center;padding:32px;color:var(--tx);opacity:.4;font-size:.9rem}
 
+@media(max-width:768px){
+  .main-content{margin-left:0;padding:20px 16px 72px}
+}
 @media(max-width:600px){
-  .wrap{padding:20px 16px 64px}
+  .wrap{}
   .stats-row{grid-template-columns:1fr}
   .ref-hero{padding:28px 16px}
   .ref-hero h1{font-size:1.5rem}
@@ -116,6 +120,13 @@ a:hover{color:var(--dk)}
 </style>
 </head>
 <body>
+
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/sidebar.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
+?>
+
+<main class="main-content">
 <div class="wrap">
   <a href="/index.php" class="back">&larr; Dashboard</a>
 
@@ -203,6 +214,7 @@ a:hover{color:var(--dk)}
   </div>
   <?php endif; ?>
 </div>
+</main>
 
 <script>
 function copyCode() {

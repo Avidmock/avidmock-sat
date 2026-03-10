@@ -73,7 +73,8 @@ body{font-family:var(--font);color:var(--tx);background:var(--bg);min-height:100
 a{color:var(--ac2);text-decoration:none;transition:color .2s var(--transition)}
 a:hover{color:var(--dk)}
 
-.wrap{max-width:860px;margin:0 auto;padding:32px 24px 80px}
+.main-content{margin-left:260px;margin-top:56px;padding:32px 32px 80px;min-height:calc(100vh - 56px)}
+.wrap{max-width:860px;margin:0 auto;padding:0}
 .back{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;color:var(--dk);opacity:.6;margin-bottom:24px;transition:opacity .2s}
 .back:hover{opacity:1}
 
@@ -114,14 +115,24 @@ a:hover{color:var(--dk)}
 .dl-btn.unlocked:hover{background:var(--ac2);color:var(--dk);transform:scale(1.03)}
 .pro-tag{font-size:.6rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ac2);font-weight:600}
 
+@media(max-width:768px){
+  .main-content{margin-left:0;padding:20px 16px 72px}
+}
 @media(max-width:600px){
-  .wrap{padding:20px 16px 64px}
+  .wrap{}
   .res-card{grid-template-columns:40px 1fr auto;gap:10px;padding:12px 14px}
   .pro-banner{flex-direction:column;text-align:center;gap:10px}
 }
 </style>
 </head>
 <body>
+
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/sidebar.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
+?>
+
+<main class="main-content">
 <div class="wrap">
   <a href="/index.php" class="back">&larr; Dashboard</a>
 
@@ -170,5 +181,6 @@ a:hover{color:var(--dk)}
   </div>
   <?php endforeach; ?>
 </div>
+</main>
 </body>
 </html>

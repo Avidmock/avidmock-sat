@@ -124,6 +124,8 @@ $activePage = 'learn';
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--ff);-webkit-font-smoothing:antialiased;background:var(--bg);color:var(--tx);min-height:100vh}
+.main-content{margin-left:260px;margin-top:56px;padding:32px 32px 80px;min-height:calc(100vh - 56px)}
+@media(max-width:768px){.main-content{margin-left:0;padding:20px 16px 72px}}
 
 .results-shell{max-width:760px;margin:0 auto;padding:32px 20px 80px}
 
@@ -192,6 +194,12 @@ body{font-family:var(--ff);-webkit-font-smoothing:antialiased;background:var(--b
 </head>
 <body>
 
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/sidebar.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
+?>
+
+<main class="main-content">
 <div class="results-shell">
 
     <!-- Hero -->
@@ -273,6 +281,7 @@ body{font-family:var(--ff);-webkit-font-smoothing:antialiased;background:var(--b
         <a href="/learn/" class="action-btn secondary">Back to Lessons</a>
     </div>
 </div>
+</main>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -302,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 30);
 
     // Message
-    const msgs = pct >= 90 ? 'Outstanding! 🎯' : pct >= 70 ? 'Great work! 💪' : pct >= 50 ? 'Good effort! Keep practicing.' : 'Keep going — review and try again!';
+    const msgs = pct >= 90 ? 'Outstanding!' : pct >= 70 ? 'Great work!' : pct >= 50 ? 'Good effort! Keep practicing.' : 'Keep going — review and try again!';
     document.getElementById('msg').textContent = msgs;
 });
 </script>

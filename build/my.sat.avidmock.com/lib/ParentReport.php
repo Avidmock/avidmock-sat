@@ -243,7 +243,7 @@ class ParentReport
             }
             $candidates[] = [
                 'type'  => 'achievement',
-                'emoji' => "\xF0\x9F\x8F\x86", // trophy
+                'emoji' => '',
                 'title' => 'Unlocked: ' . ($best['name'] ?? 'Badge'),
                 'detail'=> $best['description'] ?? '',
                 'weight'=> 90,
@@ -254,7 +254,7 @@ class ParentReport
         if (!empty($data['quizzes']) && $data['quizzes']['best_score'] >= 90) {
             $candidates[] = [
                 'type'   => 'score',
-                'emoji'  => "\xE2\xAD\x90", // star
+                'emoji'  => '',
                 'title'  => 'Scored ' . $data['quizzes']['best_score'] . '% on a quiz!',
                 'detail' => 'Best quiz score this week.',
                 'weight' => 80,
@@ -265,7 +265,7 @@ class ParentReport
         if (isset($data['quizzes']['score_delta']) && $data['quizzes']['score_delta'] > 0) {
             $candidates[] = [
                 'type'   => 'improvement',
-                'emoji'  => "\xF0\x9F\x93\x88", // chart up
+                'emoji'  => '',
                 'title'  => 'Score up +' . $data['quizzes']['score_delta'] . '% vs last week',
                 'detail' => 'Consistent improvement shows dedication.',
                 'weight' => 70,
@@ -276,7 +276,7 @@ class ParentReport
         if (!empty($data['streak']) && $data['streak']['current'] >= 5) {
             $candidates[] = [
                 'type'   => 'streak',
-                'emoji'  => "\xF0\x9F\x94\xA5", // fire
+                'emoji'  => '',
                 'title'  => $data['streak']['current'] . '-day study streak!',
                 'detail' => 'Building powerful study habits.',
                 'weight' => 60,
@@ -287,7 +287,7 @@ class ParentReport
         if (!empty($data['quizzes']) && $data['quizzes']['completed'] >= 5) {
             $candidates[] = [
                 'type'   => 'volume',
-                'emoji'  => "\xF0\x9F\x92\xAA", // muscle
+                'emoji'  => '',
                 'title'  => $data['quizzes']['completed'] . ' quizzes completed this week',
                 'detail' => 'Putting in the work!',
                 'weight' => 50,
@@ -296,7 +296,7 @@ class ParentReport
 
         if (empty($candidates)) {
             return [
-                'emoji'  => "\xF0\x9F\x8C\x9F", // glowing star
+                'emoji'  => '',
                 'title'  => 'Keeping at it!',
                 'detail' => 'Every study session brings your child closer to their goal.',
             ];
@@ -391,7 +391,7 @@ class ParentReport
             <?php if (!empty($data['score_trend']) && count($data['score_trend']) >= 2): ?>
             <div style="margin-bottom: 28px;">
                 <div style="font-size: 14px; font-weight: 700; color: #143230; margin-bottom: 12px;">
-                    &#128200; Score Trend
+                    Score Trend
                 </div>
                 <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
                     <?php
@@ -423,7 +423,7 @@ class ParentReport
             <?php if (!empty($inc['streaks']) && !empty($data['streak'])): ?>
             <div style="margin-bottom: 28px;">
                 <div style="font-size: 14px; font-weight: 700; color: #143230; margin-bottom: 12px;">
-                    &#128293; Study Streak
+                    Study Streak
                 </div>
                 <table width="100%" cellpadding="0" cellspacing="0">
                     <tr>

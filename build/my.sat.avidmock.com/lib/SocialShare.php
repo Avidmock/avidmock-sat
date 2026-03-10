@@ -53,10 +53,10 @@ class SocialShare
 
     // ── League thresholds & labels ──────────────────────────────
     private const LEAGUES = [
-        'bronze'  => ['min' => 0,    'label' => 'Bronze',  'color' => '#cd7f32', 'emoji' => "\xF0\x9F\xA5\x89"],
-        'silver'  => ['min' => 300,  'label' => 'Silver',  'color' => '#a8a8b8', 'emoji' => "\xF0\x9F\xA5\x88"],
-        'gold'    => ['min' => 750,  'label' => 'Gold',    'color' => '#f5a623', 'emoji' => "\xF0\x9F\xA5\x87"],
-        'diamond' => ['min' => 1500, 'label' => 'Diamond', 'color' => '#1fe290', 'emoji' => "\xF0\x9F\x92\x8E"],
+        'bronze'  => ['min' => 0,    'label' => 'Bronze',  'color' => '#cd7f32', 'emoji' => ''],
+        'silver'  => ['min' => 300,  'label' => 'Silver',  'color' => '#a8a8b8', 'emoji' => ''],
+        'gold'    => ['min' => 750,  'label' => 'Gold',    'color' => '#f5a623', 'emoji' => ''],
+        'diamond' => ['min' => 1500, 'label' => 'Diamond', 'color' => '#1fe290', 'emoji' => ''],
     ];
 
     // ── Generate score card data ────────────────────────────────

@@ -102,6 +102,8 @@ $activePage = 'learn';
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--ff);-webkit-font-smoothing:antialiased;background:var(--bg);color:var(--tx);min-height:100vh}
+.main-content{margin-left:260px;margin-top:56px;padding:32px 32px 80px;min-height:calc(100vh - 56px)}
+@media(max-width:768px){.main-content{margin-left:0;padding:20px 16px 72px}}
 .review-shell{max-width:760px;margin:0 auto;padding:32px 20px 80px}
 
 /* ── Header ── */
@@ -167,6 +169,12 @@ body{font-family:var(--ff);-webkit-font-smoothing:antialiased;background:var(--b
 </head>
 <body>
 
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/sidebar.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
+?>
+
+<main class="main-content">
 <div class="review-shell">
     <!-- Header -->
     <div class="review-header">
@@ -199,7 +207,7 @@ body{font-family:var(--ff);-webkit-font-smoothing:antialiased;background:var(--b
     <div class="q-card <?= $isCorrect ? 'is-correct' : 'is-incorrect' ?>" data-status="<?= $isCorrect ? 'correct' : 'incorrect' ?>">
         <div class="q-top">
             <span class="q-num">Q<?= $i + 1 ?></span>
-            <span class="q-status <?= $isCorrect ? 'correct' : 'incorrect' ?>"><?= $isCorrect ? '✓ Correct' : '✗ Incorrect' ?></span>
+            <span class="q-status <?= $isCorrect ? 'correct' : 'incorrect' ?>"><?= $isCorrect ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><polyline points="20 6 9 17 4 12"/></svg>Correct' : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Incorrect' ?></span>
             <span class="q-difficulty"><?= htmlspecialchars($difficulty) ?></span>
             <span class="q-time"><?= $timeSpent ?>s</span>
         </div>
@@ -245,6 +253,7 @@ body{font-family:var(--ff);-webkit-font-smoothing:antialiased;background:var(--b
         <?php endif; ?>
     </div>
 </div>
+</main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>

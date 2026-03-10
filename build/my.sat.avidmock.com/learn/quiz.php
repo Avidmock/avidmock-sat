@@ -330,7 +330,7 @@ function renderQuestion(idx) {
     html += `</div>`;
 
     if (isAnswered && savedAnswer?.explanation) {
-        html += `<div class="explanation show"><strong>${savedAnswer.correct ? '✓ Correct!' : '✗ Incorrect.'}</strong> ${savedAnswer.explanation}</div>`;
+        html += `<div class="explanation show"><strong>${savedAnswer.correct ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><polyline points="20 6 9 17 4 12"/></svg>Correct!' : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Incorrect.'}</strong> ${savedAnswer.explanation}</div>`;
     }
 
     html += `</div>`;
@@ -492,7 +492,7 @@ function showResults() {
     else { ring.style.stroke = '#e74c3c'; }
 
     // Message
-    const msgs = pct >= 90 ? 'Outstanding! 🎯' : pct >= 70 ? 'Great work! 💪' : pct >= 50 ? 'Good effort! Keep practicing.' : 'Keep going — review the explanations!';
+    const msgs = pct >= 90 ? 'Outstanding!' : pct >= 70 ? 'Great work!' : pct >= 50 ? 'Good effort! Keep practicing.' : 'Keep going — review the explanations!';
     document.getElementById('score-msg').textContent = msgs;
 
     // Submit the quiz

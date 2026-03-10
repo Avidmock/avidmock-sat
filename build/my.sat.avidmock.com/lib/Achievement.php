@@ -292,10 +292,10 @@ class Achievement
     private static function getTierEmoji(string $tier): string
     {
         return match($tier) {
-            'diamond' => '💎',
-            'gold'    => '🥇',
-            'silver'  => '🥈',
-            default   => '🥉',
+            'diamond' => '',
+            'gold'    => '',
+            'silver'  => '',
+            default   => '',
         };
     }
 }

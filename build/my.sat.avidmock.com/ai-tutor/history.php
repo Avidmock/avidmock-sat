@@ -105,7 +105,8 @@ button{font-family:var(--ff);cursor:pointer}
 .sidebar-overlay.show{opacity:1;pointer-events:all}
 
 /* MAIN */
-.main{margin-left:var(--sidebar-w);margin-top:var(--topbar-h);padding:32px 28px 80px;min-height:calc(100vh - var(--topbar-h))}
+.main-content{margin-left:260px;margin-top:56px;padding:32px 32px 80px;min-height:calc(100vh - 56px)}
+@media(max-width:768px){.main-content{margin-left:0;padding:20px 16px 72px}}
 
 /* STAT CARDS */
 .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
@@ -206,57 +207,13 @@ button{font-family:var(--ff);cursor:pointer}
 </style>
 </head>
 <body>
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-<!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar">
-    <a href="/" class="sb-brand">
-        <img src="/assets/images/logos/avidmock-logo-white.svg" alt="Avidmock" onerror="this.style.display='none'">
-        <span class="sb-brand-name">Avidmock SAT</span>
-        <span class="sb-brand-dot"></span>
-    </a>
-    <nav class="sb-nav">
-        <div class="sb-section">Main</div>
-        <a href="/" class="sb-link"><svg class="sb-ico" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Dashboard</a>
-        <a href="/schedule/" class="sb-link"><svg class="sb-ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>My Schedule</a>
-        <div class="sb-section">Learn</div>
-        <a href="/math/" class="sb-link"><svg class="sb-ico" viewBox="0 0 24 24"><path d="M4 19l8-14 8 14H4z"/></svg>Math</a>
-        <a href="/reading/" class="sb-link"><svg class="sb-ico" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reading &amp; Writing</a>
-        <a href="/practice-tests/" class="sb-link"><svg class="sb-ico" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Practice Tests</a>
-        <div class="sb-section">Tools</div>
-        <a href="/ai-tutor/" class="sb-link active"><svg class="sb-ico" viewBox="0 0 24 24"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>AI Tutor</a>
-        <a href="/writing-lab/" class="sb-link"><svg class="sb-ico" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Writing Lab</a>
-        <a href="/sessions/" class="sb-link"><svg class="sb-ico" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Group Sessions</a>
-        <div class="sb-section">Progress</div>
-        <a href="/leaderboard/" class="sb-link"><svg class="sb-ico" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>Leaderboard</a>
-        <a href="/achievements/" class="sb-link"><svg class="sb-ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Achievements</a>
-        <a href="/profile/" class="sb-link"><svg class="sb-ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</a>
-    </nav>
-    <a href="/profile/" class="sb-user">
-        <div class="sb-avatar"><?= strtoupper(substr($firstName,0,1)) ?></div>
-        <div style="min-width:0">
-            <div class="sb-user-name"><?= htmlspecialchars($user['name'] ?? 'Student') ?></div>
-            <div class="sb-user-meta"><?= $currentStreak ?> day streak</div>
-        </div>
-    </a>
-</aside>
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/sidebar.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
+?>
 
-<!-- TOPBAR -->
-<header class="topbar">
-    <button class="ham-btn" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
-    <div class="topbar-greeting">
-        <h1>Conversation History</h1>
-        <p><?= $totalConvs ?> conversation<?= $totalConvs !== 1 ? 's' : '' ?> · <?= $totalMessages ?> messages total</p>
-    </div>
-    <div class="topbar-actions">
-        <a href="/ai-tutor/" class="topbar-btn btn-mint">
-            <svg viewBox="0 0 24 24"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            New Chat
-        </a>
-    </div>
-</header>
-
-<main class="main">
+<main class="main-content">
 
     <!-- Breadcrumb -->
     <nav style="font-size:.8125rem;color:var(--tx3);margin-bottom:20px" class="sr">
@@ -401,19 +358,6 @@ button{font-family:var(--ff);cursor:pointer}
 (function(){
     var io = new IntersectionObserver(function(e){e.forEach(function(n){if(n.isIntersecting){n.target.classList.add('visible');io.unobserve(n.target)}})},{threshold:.04,rootMargin:'0px 0px -16px 0px'});
     document.querySelectorAll('.sr').forEach(function(el){io.observe(el)});
-
-    window.toggleSidebar = function(){
-        var sb=document.getElementById('sidebar'),ov=document.getElementById('sidebarOverlay');
-        var open=sb.classList.toggle('open');
-        ov.classList.toggle('show',open);
-        document.body.style.overflow=open?'hidden':'';
-    };
-    document.getElementById('sidebarOverlay').addEventListener('click',function(){
-        document.getElementById('sidebar').classList.remove('open');
-        this.classList.remove('show');
-        document.body.style.overflow='';
-    });
-    window.addEventListener('resize',function(){ if(window.innerWidth>900){ document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); document.body.style.overflow=''; } });
 
     /* Live search with debounce */
     var searchInp = document.getElementById('searchInp');

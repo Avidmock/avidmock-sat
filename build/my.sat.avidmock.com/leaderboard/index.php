@@ -81,7 +81,8 @@ body{font-family:var(--font);color:var(--tx);background:var(--bg);min-height:100
 a{color:var(--ac2);text-decoration:none;transition:color .2s var(--transition)}
 a:hover{color:var(--dk)}
 
-.wrap{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+.main-content{margin-left:260px;margin-top:56px;padding:32px 32px 80px;min-height:calc(100vh - 56px)}
+.wrap{max-width:900px;margin:0 auto;padding:0}
 .back{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;color:var(--dk);opacity:.6;margin-bottom:24px;transition:opacity .2s}
 .back:hover{opacity:1;color:var(--dk)}
 
@@ -145,8 +146,11 @@ a:hover{color:var(--dk)}
 .empty-state svg{width:48px;height:48px;margin-bottom:12px;opacity:.3}
 .empty-state p{font-size:.9rem}
 
+@media(max-width:768px){
+  .main-content{margin-left:0;padding:20px 16px 72px}
+}
 @media(max-width:600px){
-  .wrap{padding:20px 16px 64px}
+  .wrap{}
   .rank-card{grid-template-columns:1fr;text-align:center;padding:24px 20px}
   .rank-card .rank-meta{justify-content:center}
   .rank-card .league-badge{flex-direction:row;gap:10px}
@@ -155,6 +159,13 @@ a:hover{color:var(--dk)}
 </style>
 </head>
 <body>
+
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/sidebar.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
+?>
+
+<main class="main-content">
 <div class="wrap">
   <a href="/index.php" class="back">&larr; Dashboard</a>
 
@@ -320,6 +331,7 @@ a:hover{color:var(--dk)}
     </div>
   </div>
 </div>
+</main>
 
 <script>
 document.querySelectorAll('.tab-btn').forEach(btn => {

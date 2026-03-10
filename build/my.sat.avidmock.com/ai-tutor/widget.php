@@ -278,20 +278,20 @@ if ($isEmbed) {
     if ($widgetSubject === 'math') {
         $suggestions = [
             ['icon'=>'△', 'text'=>'Explain this concept with an example'],
-            ['icon'=>'✏', 'text'=>'Give me a practice problem like this'],
-            ['icon'=>'⚠', 'text'=>'What mistakes should I avoid here?'],
+            ['icon'=>'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>', 'text'=>'Give me a practice problem like this'],
+            ['icon'=>'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>', 'text'=>'What mistakes should I avoid here?'],
         ];
     } elseif ($widgetSubject === 'reading_writing') {
         $suggestions = [
-            ['icon'=>'📖', 'text'=>'How do I approach this question type?'],
-            ['icon'=>'✏',  'text'=>'Show me an elimination strategy'],
-            ['icon'=>'⚠',  'text'=>'What are the common traps here?'],
+            ['icon'=>'', 'text'=>'How do I approach this question type?'],
+            ['icon'=>'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>',  'text'=>'Show me an elimination strategy'],
+            ['icon'=>'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',  'text'=>'What are the common traps here?'],
         ];
     } else {
         $suggestions = [
-            ['icon'=>'💡', 'text'=>'Explain this step by step'],
-            ['icon'=>'✏',  'text'=>'Give me a practice problem'],
-            ['icon'=>'⚠',  'text'=>'What are common mistakes here?'],
+            ['icon'=>'', 'text'=>'Explain this step by step'],
+            ['icon'=>'', 'text'=>'Give me a practice problem'],
+            ['icon'=>'', 'text'=>'What are common mistakes here?'],
         ];
     }
     ?>

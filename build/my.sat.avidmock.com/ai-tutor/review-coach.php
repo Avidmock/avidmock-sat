@@ -151,7 +151,8 @@ button{font-family:var(--ff);cursor:pointer}
 .sidebar-overlay.show{opacity:1;pointer-events:all}
 
 /* MAIN */
-.main{margin-left:var(--sidebar-w);margin-top:var(--topbar-h);padding:32px 28px 80px;max-width:calc(var(--sidebar-w) + 960px)}
+.main-content{margin-left:260px;margin-top:56px;padding:32px 32px 80px;min-height:calc(100vh - 56px)}
+@media(max-width:768px){.main-content{margin-left:0;padding:20px 16px 72px}}
 
 /* SCORE BANNER */
 .score-banner{

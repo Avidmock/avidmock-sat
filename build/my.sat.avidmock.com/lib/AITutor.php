@@ -251,7 +251,7 @@ SOCRATIC;
             $context .= "- Connect current discussion to these gaps when relevant\n";
             $context .= "- If they ask about a topic they've been getting wrong, start from where they're struggling\n";
             if ($repeatTopics) {
-                $context .= "⚠ REPEAT ERROR PATTERN: Student has multiple recent mistakes in: " . implode(', ', array_keys($repeatTopics)) . ". Prioritize these.\n";
+                $context .= "REPEAT ERROR PATTERN: Student has multiple recent mistakes in: " . implode(', ', array_keys($repeatTopics)) . ". Prioritize these.\n";
             }
             $context .= "\n";
             foreach ($recentWrong as $i => $wrong) {

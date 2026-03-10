@@ -1297,7 +1297,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php';
         if (!pw || !con || !hint) return;
         if (!con.value) { hint.textContent = ''; return; }
         var match = pw.value === con.value;
-        hint.textContent = match ? '✓ Passwords match' : '✗ Passwords do not match';
+        hint.innerHTML = match ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><polyline points="20 6 9 17 4 12"/></svg>Passwords match' : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Passwords do not match';
         hint.style.color = match ? 'var(--ac2)' : 'var(--err)';
     };
 
