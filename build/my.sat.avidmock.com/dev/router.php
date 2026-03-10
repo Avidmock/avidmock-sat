@@ -8,7 +8,7 @@
  */
 
 $uri  = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$root = __DIR__ . '/..';
+$root = realpath(__DIR__ . '/..');
 
 // Serve static files directly
 $staticExts = ['css','js','png','jpg','jpeg','gif','svg','ico','woff','woff2','ttf','eot','pdf','map'];
@@ -85,23 +85,13 @@ $code = preg_replace(
 
 // Replace require_once for lib/ files (already mocked) — but NOT includes/
 $code = preg_replace(
-    "/require_once\s+.*?\/lib\/\w+\.php.*?;/",
+    "/require_once\s+.*?[\/\\\\]lib[\/\\\\]\w+\.php.*?;/",
     "/* mock: lib already loaded */",
     $code
 );
 
-// Fix $_SERVER['DOCUMENT_ROOT'] references so includes/ paths resolve correctly
-// Replace DOCUMENT_ROOT with the actual root path
-$code = str_replace(
-    "\$_SERVER['DOCUMENT_ROOT']",
-    "'" . str_replace("'", "\\'", $root) . "'",
-    $code
-);
-$code = str_replace(
-    '$_SERVER["DOCUMENT_ROOT"]',
-    "'" . str_replace("'", "\\'", $root) . "'",
-    $code
-);
+// $_SERVER['DOCUMENT_ROOT'] is already set to $root (line 70),
+// so included files will resolve paths correctly at runtime.
 
 // Write to temp file and include
 $tmp = tempnam(sys_get_temp_dir(), 'avm_');
